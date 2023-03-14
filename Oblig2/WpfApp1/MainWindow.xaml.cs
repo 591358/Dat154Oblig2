@@ -134,11 +134,23 @@ namespace WpfApp1
              double x = Canvas.GetLeft(el);*/
             /*Canvas.GetTop(el)*/
 
-            double X = e.GetPosition(this).X;
-            double Y = e.GetPosition(this).Y;
 
-            PaintCanvas.RenderTransform = new ScaleTransform(newscale, newscale, X, Y);
-            /*PaintCanvas.RenderTransform = new ScaleTransform(newscale, newscale, Y, X);*/
+
+            double distance = (PaintCanvas.ActualWidth / 2) - Canvas.GetLeft(el);
+
+            for (int i = PaintCanvas.Children.Count - 1; i >= 0; i += -1)
+            {
+                UIElement Child = PaintCanvas.Children[i];
+
+                Canvas.SetLeft(Child, Canvas.GetLeft(Child) + distance);
+
+
+            }
+            PaintCanvas.RenderTransform = new ScaleTransform(newscale, newscale, Canvas.GetLeft(el), Canvas.GetTop(el));
+
+
+            /*PaintCanvas.RenderTransform = new ScaleTransform(newscale, newscale, X, Y);*/
+
             /*PaintCanvas.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);*/
 
         }
